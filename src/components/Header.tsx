@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import noryxLogo from "@/assets/noryx-logo.png";
 
 const navItems = [
   { label: "Process", href: "#process" },
@@ -36,11 +35,9 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#" className="flex items-center">
-            <img 
-              src={noryxLogo} 
-              alt="NORYX" 
-              className="h-10 w-auto"
-            />
+            <span className="text-2xl font-heading font-bold tracking-tight text-foreground">
+              NORYX
+            </span>
           </a>
 
           {/* Desktop Navigation */}
