@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import noryxLogo from "@/assets/noryx-logo.png";
 
 const navItems = [
-  { label: "Process", href: "#process" },
-  { label: "Services", href: "#services" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Process", href: "/#process" },
+  { label: "Services", href: "/#services" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const Header = () => {
