@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import noryxLogo from "@/assets/noryx-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,8 +8,8 @@ const Footer = () => {
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
-          <a href="#" className="text-2xl font-heading font-bold text-foreground">
-            NORYX
+          <a href="#" className="flex items-center">
+            <img src={noryxLogo} alt="NORYX" className="h-10 w-auto" />
           </a>
 
           {/* Links */}
