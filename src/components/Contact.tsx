@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { ArrowRight, Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Select,
   SelectContent,
@@ -18,17 +19,27 @@ const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [budget, setBudget] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast.success("Message sent! We'll get back to you soon.");
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const company = (form.elements.namedItem("company") as HTMLInputElement).value;
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
+    const { error } = await supabase.from("contact_submissions").insert({
+      name, email, company: company || null, budget_range: budget || null, message,
+    });
+    if (error) {
+      toast.error("Something went wrong. Please try again.");
+    } else {
+      toast.success("Message sent! We'll get back to you soon.");
+      form.reset();
+      setBudget("");
+    }
     setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
   };
 
   return (
@@ -85,6 +96,7 @@ const Contact = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground">Name *</label>
                   <Input 
+                    name="name"
                     required 
                     placeholder="Your name" 
                     className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12"
@@ -93,6 +105,7 @@ const Contact = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-foreground">Email *</label>
                   <Input 
+                    name="email"
                     required 
                     type="email" 
                     placeholder="your@email.com" 
@@ -104,6 +117,7 @@ const Contact = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Company <span className="text-muted-foreground">(optional)</span></label>
                 <Input 
+                  name="company"
                   placeholder="Your company" 
                   className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12"
                 />
@@ -111,7 +125,7 @@ const Contact = () => {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Budget Range *</label>
-                <Select required>
+                <Select value={budget} onValueChange={setBudget}>
                   <SelectTrigger className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12">
                     <SelectValue placeholder="Select your budget" />
                   </SelectTrigger>
@@ -127,6 +141,7 @@ const Contact = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Project Details *</label>
                 <Textarea 
+                  name="message"
                   required
                   placeholder="Tell us about your project, goals, and timeline..."
                   rows={5}
