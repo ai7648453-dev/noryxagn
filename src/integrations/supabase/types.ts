@@ -50,6 +50,159 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          budget_range: string | null
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          is_read: boolean
+          message: string
+          name: string
+        }
+        Insert: {
+          budget_range?: string | null
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          is_read?: boolean
+          message: string
+          name: string
+        }
+        Update: {
+          budget_range?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      hero_settings: {
+        Row: {
+          cta_primary_link: string | null
+          cta_primary_text: string | null
+          cta_secondary_link: string | null
+          cta_secondary_text: string | null
+          description: string | null
+          heading: string
+          heading_highlight: string
+          heading_line2: string
+          id: string
+          overlay_opacity: number | null
+          tagline: string | null
+          updated_at: string
+          video_enabled: boolean
+          video_url: string | null
+        }
+        Insert: {
+          cta_primary_link?: string | null
+          cta_primary_text?: string | null
+          cta_secondary_link?: string | null
+          cta_secondary_text?: string | null
+          description?: string | null
+          heading?: string
+          heading_highlight?: string
+          heading_line2?: string
+          id?: string
+          overlay_opacity?: number | null
+          tagline?: string | null
+          updated_at?: string
+          video_enabled?: boolean
+          video_url?: string | null
+        }
+        Update: {
+          cta_primary_link?: string | null
+          cta_primary_text?: string | null
+          cta_secondary_link?: string | null
+          cta_secondary_text?: string | null
+          description?: string | null
+          heading?: string
+          heading_highlight?: string
+          heading_line2?: string
+          id?: string
+          overlay_opacity?: number | null
+          tagline?: string | null
+          updated_at?: string
+          video_enabled?: boolean
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      media_library: {
+        Row: {
+          created_at: string
+          file_size: number | null
+          file_type: string | null
+          id: string
+          name: string
+          uploaded_by: string | null
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          name: string
+          uploaded_by?: string | null
+          url: string
+        }
+        Update: {
+          created_at?: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          name?: string
+          uploaded_by?: string | null
+          url?: string
+        }
+        Relationships: []
+      }
+      pages: {
+        Row: {
+          created_at: string
+          display_order: number | null
+          id: string
+          is_enabled: boolean
+          meta_description: string | null
+          meta_title: string | null
+          og_image_url: string | null
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          is_enabled?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          og_image_url?: string | null
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          is_enabled?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          og_image_url?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       projects: {
         Row: {
           category: Database["public"]["Enums"]["project_category"]
@@ -86,6 +239,69 @@ export type Database = {
           project_link?: string | null
           thumbnail_url?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string
+          cta_text: string | null
+          description: string | null
+          display_order: number | null
+          icon_name: string | null
+          id: string
+          is_enabled: boolean
+          price: string | null
+          tag: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          cta_text?: string | null
+          description?: string | null
+          display_order?: number | null
+          icon_name?: string | null
+          id?: string
+          is_enabled?: boolean
+          price?: string | null
+          tag?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          cta_text?: string | null
+          description?: string | null
+          display_order?: number | null
+          icon_name?: string | null
+          id?: string
+          is_enabled?: boolean
+          price?: string | null
+          tag?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          id: string
+          key: string
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          id?: string
+          key: string
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          id?: string
+          key?: string
+          updated_at?: string
+          value?: string | null
         }
         Relationships: []
       }
