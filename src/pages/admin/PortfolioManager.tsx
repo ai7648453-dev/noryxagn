@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, Save, ExternalLink } from "lucide-react";
+import { Plus, Pencil, Trash2, Save, ExternalLink, Upload } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 type Project = Tables<"projects">;
@@ -22,6 +22,8 @@ const PortfolioManager = () => {
   const [editing, setEditing] = useState<Project | null>(null);
   const [form, setForm] = useState(emptyProject);
   const [open, setOpen] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { data: projects = [], isLoading } = useQuery({
     queryKey: ["admin-projects"],
@@ -88,7 +90,31 @@ const PortfolioManager = () => {
                 </div>
                 <div className="space-y-1"><label className="text-xs text-muted-foreground">Order</label><Input type="number" value={form.display_order} onChange={(e) => setForm({ ...form, display_order: parseInt(e.target.value) || 0 })} className="bg-secondary/50 border-border/50" /></div>
               </div>
-              <div className="space-y-1"><label className="text-xs text-muted-foreground">Thumbnail URL</label><Input value={form.thumbnail_url} onChange={(e) => setForm({ ...form, thumbnail_url: e.target.value })} className="bg-secondary/50 border-border/50" /></div>
+              <div className="space-y-1">
+                <label className="text-xs text-muted-foreground">Thumbnail</label>
+                {form.thumbnail_url && (
+                  <img src={form.thumbnail_url} alt="Thumbnail preview" className="w-full h-32 object-cover rounded-lg mb-2" />
+                )}
+                <div className="flex gap-2">
+                  <Input value={form.thumbnail_url} onChange={(e) => setForm({ ...form, thumbnail_url: e.target.value })} placeholder="URL or upload" className="bg-secondary/50 border-border/50 flex-1" />
+                  <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    setUploading(true);
+                    const ext = file.name.split(".").pop();
+                    const path = `projects/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+                    const { error: uploadError } = await supabase.storage.from("media").upload(path, file);
+                    if (uploadError) { toast.error(uploadError.message); setUploading(false); return; }
+                    const { data: urlData } = supabase.storage.from("media").getPublicUrl(path);
+                    setForm((f) => ({ ...f, thumbnail_url: urlData.publicUrl }));
+                    toast.success("Uploaded");
+                    setUploading(false);
+                  }} />
+                  <Button type="button" variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} disabled={uploading}>
+                    <Upload className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
               <div className="space-y-1"><label className="text-xs text-muted-foreground">Live Link</label><Input value={form.project_link} onChange={(e) => setForm({ ...form, project_link: e.target.value })} className="bg-secondary/50 border-border/50" /></div>
               <div className="flex items-center gap-3">
                 <Switch checked={form.is_featured} onCheckedChange={(v) => setForm({ ...form, is_featured: v })} />
