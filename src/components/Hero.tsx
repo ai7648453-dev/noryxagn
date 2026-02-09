@@ -1,25 +1,50 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Hero = () => {
+  const { data: hero } = useQuery({
+    queryKey: ["hero-settings"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("hero_settings").select("*").limit(1).maybeSingle();
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const heading = hero?.heading ?? "Next-Level";
+  const headingHighlight = hero?.heading_highlight ?? "Digital Agency";
+  const headingLine2 = hero?.heading_line2 ?? "for Modern Brands";
+  const tagline = hero?.tagline ?? "Design. Strategy. Growth. Built to perform.";
+  const description = hero?.description ?? "NORYX is a global digital agency creating high-impact websites, brands, and digital experiences that help businesses stand out and scale with confidence.";
+  const ctaPrimaryText = hero?.cta_primary_text ?? "Start Your Project";
+  const ctaPrimaryLink = hero?.cta_primary_link ?? "#contact";
+  const ctaSecondaryText = hero?.cta_secondary_text ?? "View Services";
+  const ctaSecondaryLink = hero?.cta_secondary_link ?? "#services";
+  const videoUrl = hero?.video_url ?? "/videos/hero-bg.mp4";
+  const videoEnabled = hero?.video_enabled ?? true;
+  const overlayOpacity = hero?.overlay_opacity ?? 70;
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden noise-overlay">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectFit: 'cover' }}
-        >
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
-        </video>
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-background/70" />
+        {videoEnabled && videoUrl && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectFit: 'cover' }}
+          >
+            <source src={videoUrl} type="video/mp4" />
+          </video>
+        )}
+        <div className="absolute inset-0 bg-background" style={{ opacity: overlayOpacity / 100 }} />
       </div>
       
       {/* Gradient background effects */}
@@ -49,10 +74,10 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-[1.1] tracking-tight mb-6"
           >
-            <span className="text-foreground">Next-Level </span>
-            <span className="text-gradient-gold">Digital Agency</span>
+            <span className="text-foreground">{heading} </span>
+            <span className="text-gradient-gold">{headingHighlight}</span>
             <br />
-            <span className="text-foreground">for Modern Brands</span>
+            <span className="text-foreground">{headingLine2}</span>
           </motion.h1>
 
           {/* Tagline */}
@@ -62,7 +87,7 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-4 font-medium"
           >
-            Design. Strategy. Growth. Built to perform.
+            {tagline}
           </motion.p>
 
           {/* Description */}
@@ -72,8 +97,7 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="text-base md:text-lg text-muted-foreground/80 mb-10 max-w-2xl mx-auto"
           >
-            NORYX is a global digital agency creating high-impact websites, brands, 
-            and digital experiences that help businesses stand out and scale with confidence.
+            {description}
           </motion.p>
 
           {/* CTAs */}
@@ -84,13 +108,13 @@ const Hero = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button variant="hero" size="xl" className="group" asChild>
-              <a href="#contact">
-                Start Your Project
+              <a href={ctaPrimaryLink}>
+                {ctaPrimaryText}
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
               </a>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
-              <a href="#services">View Services</a>
+              <a href={ctaSecondaryLink}>{ctaSecondaryText}</a>
             </Button>
           </motion.div>
 
