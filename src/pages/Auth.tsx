@@ -14,9 +14,8 @@ const loginSchema = z.object({
 });
 
 const Auth = () => {
-  const { user, loading, signIn, signUp } = useAuth();
+  const { user, loading, signIn } = useAuth();
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -36,25 +35,12 @@ const Auth = () => {
     }
 
     setSubmitting(true);
-    if (isLogin) {
-      const { error } = await signIn(email, password);
-      if (error) {
-        if (error.message.includes("Invalid login")) {
-          toast.error("Invalid email or password.");
-        } else {
-          toast.error(error.message);
-        }
-      }
-    } else {
-      const { error } = await signUp(email, password);
-      if (error) {
-        if (error.message.includes("already registered")) {
-          toast.error("This email is already registered. Please sign in.");
-        } else {
-          toast.error(error.message);
-        }
+    const { error } = await signIn(email, password);
+    if (error) {
+      if (error.message.includes("Invalid login")) {
+        toast.error("Invalid email or password.");
       } else {
-        toast.success("Check your email to confirm your account.");
+        toast.error(error.message);
       }
     }
     setSubmitting(false);
@@ -77,12 +63,8 @@ const Auth = () => {
       >
         <div className="text-center mb-8">
           <img src={noryxLogo} alt="NORYX" className="h-12 mx-auto mb-6" />
-          <h1 className="text-2xl font-heading font-bold text-foreground">
-            {isLogin ? "Admin Login" : "Create Account"}
-          </h1>
-          <p className="text-sm text-muted-foreground mt-2">
-            {isLogin ? "Sign in to manage your website" : "Register a new account"}
-          </p>
+          <h1 className="text-2xl font-heading font-bold text-foreground">Admin Login</h1>
+          <p className="text-sm text-muted-foreground mt-2">Sign in to manage your website</p>
         </div>
 
         <form onSubmit={handleSubmit} className="glass-card rounded-2xl p-8 space-y-5">
@@ -109,19 +91,9 @@ const Auth = () => {
             />
           </div>
           <Button type="submit" variant="hero" className="w-full" disabled={submitting}>
-            {submitting ? "Please wait..." : isLogin ? "Sign In" : "Sign Up"}
+            {submitting ? "Please wait..." : "Sign In"}
           </Button>
         </form>
-
-        <p className="text-center text-sm text-muted-foreground mt-6">
-          {isLogin ? "Need an account?" : "Already have an account?"}{" "}
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className="text-primary hover:underline font-medium"
-          >
-            {isLogin ? "Sign Up" : "Sign In"}
-          </button>
-        </p>
 
         <div className="text-center mt-4">
           <a href="/" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
