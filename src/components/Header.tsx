@@ -6,6 +6,7 @@ import noryxLogo from "@/assets/noryx-logo.png";
 
 const navItems = [
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Marketplace", href: "/marketplace" },
   { label: "Process", href: "/#process" },
   { label: "Services", href: "/#services" },
   { label: "FAQ", href: "/#faq" },
