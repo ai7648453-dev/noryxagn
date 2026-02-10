@@ -134,6 +134,57 @@ export type Database = {
         }
         Relationships: []
       }
+      marketplace_listings: {
+        Row: {
+          contact_email: string
+          created_at: string
+          description: string | null
+          display_order: number | null
+          id: string
+          is_admin_listing: boolean
+          is_featured: boolean
+          price: number
+          status: Database["public"]["Enums"]["listing_status"]
+          submitted_by_user_id: string | null
+          thumbnail_url: string | null
+          updated_at: string
+          website_name: string
+          website_url: string
+        }
+        Insert: {
+          contact_email: string
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          is_admin_listing?: boolean
+          is_featured?: boolean
+          price: number
+          status?: Database["public"]["Enums"]["listing_status"]
+          submitted_by_user_id?: string | null
+          thumbnail_url?: string | null
+          updated_at?: string
+          website_name: string
+          website_url: string
+        }
+        Update: {
+          contact_email?: string
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          is_admin_listing?: boolean
+          is_featured?: boolean
+          price?: number
+          status?: Database["public"]["Enums"]["listing_status"]
+          submitted_by_user_id?: string | null
+          thumbnail_url?: string | null
+          updated_at?: string
+          website_name?: string
+          website_url?: string
+        }
+        Relationships: []
+      }
       media_library: {
         Row: {
           created_at: string
@@ -377,6 +428,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      listing_status: "pending" | "approved" | "rejected"
       project_category: "web-design" | "branding" | "e-commerce" | "ui-ux"
     }
     CompositeTypes: {
@@ -506,6 +558,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      listing_status: ["pending", "approved", "rejected"],
       project_category: ["web-design", "branding", "e-commerce", "ui-ux"],
     },
   },

@@ -19,6 +19,8 @@ import SEOManager from "./pages/admin/SEOManager";
 import LeadsManager from "./pages/admin/LeadsManager";
 import SettingsManager from "./pages/admin/SettingsManager";
 import NotFound from "./pages/NotFound";
+import Marketplace from "./pages/Marketplace";
+import MarketplaceManager from "./pages/admin/MarketplaceManager";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +34,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Dashboard />} />
@@ -44,6 +47,7 @@ const App = () => (
               <Route path="seo" element={<SEOManager />} />
               <Route path="leads" element={<LeadsManager />} />
               <Route path="settings" element={<SettingsManager />} />
+              <Route path="marketplace" element={<MarketplaceManager />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
