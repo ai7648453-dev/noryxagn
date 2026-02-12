@@ -27,10 +27,11 @@ const Contact = () => {
     const form = e.currentTarget;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const phone = (form.elements.namedItem("phone") as HTMLInputElement).value;
     const company = (form.elements.namedItem("company") as HTMLInputElement).value;
     const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
     const { error } = await supabase.from("contact_submissions").insert({
-      name, email, company: company || null, budget_range: budget || null, message,
+      name, email, phone: phone || null, company: company || null, budget_range: budget || null, message, page_source: "Home – Contact",
     });
     if (error) {
       toast.error("Something went wrong. Please try again.");
@@ -114,13 +115,24 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Company <span className="text-muted-foreground">(optional)</span></label>
-                <Input 
-                  name="company"
-                  placeholder="Your company" 
-                  className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12"
-                />
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Phone <span className="text-muted-foreground">(optional)</span></label>
+                  <Input 
+                    name="phone"
+                    type="tel"
+                    placeholder="+1 (555) 000-0000" 
+                    className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground">Company <span className="text-muted-foreground">(optional)</span></label>
+                  <Input 
+                    name="company"
+                    placeholder="Your company" 
+                    className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12"
+                  />
+                </div>
               </div>
 
               <div className="space-y-2">

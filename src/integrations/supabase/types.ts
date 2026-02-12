@@ -60,6 +60,8 @@ export type Database = {
           is_read: boolean
           message: string
           name: string
+          page_source: string | null
+          phone: string | null
         }
         Insert: {
           budget_range?: string | null
@@ -70,6 +72,8 @@ export type Database = {
           is_read?: boolean
           message: string
           name: string
+          page_source?: string | null
+          phone?: string | null
         }
         Update: {
           budget_range?: string | null
@@ -80,6 +84,8 @@ export type Database = {
           is_read?: boolean
           message?: string
           name?: string
+          page_source?: string | null
+          phone?: string | null
         }
         Relationships: []
       }
