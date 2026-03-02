@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Accordion,
   AccordionContent,
@@ -8,53 +10,28 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const faqs = [
-  {
-    question: "How long does a typical project take?",
-    answer: "Most projects take 3–6 weeks depending on scope, content readiness, and feedback cycles.",
-  },
-  {
-    question: "Do you work with international clients?",
-    answer: "Yes. NORYX works with clients worldwide using streamlined remote collaboration.",
-  },
-  {
-    question: "What platforms do you build on?",
-    answer: "We work with modern, scalable platforms and custom solutions based on your needs — always choosing what fits the project best.",
-  },
-  {
-    question: "Can you redesign an existing website?",
-    answer: "Absolutely. We frequently redesign outdated or underperforming websites.",
-  },
-  {
-    question: "Do you provide ongoing support?",
-    answer: "Yes. Maintenance, updates, and ongoing optimization are available after launch.",
-  },
-  {
-    question: "Is SEO included?",
-    answer: "We build with SEO best practices in mind. Advanced SEO services can be added if needed.",
-  },
-  {
-    question: "Do you help with content?",
-    answer: "Yes. We can assist with structure, messaging, and UX-focused copy.",
-  },
-  {
-    question: "What do you need from us to start?",
-    answer: "A clear goal, basic business information, and timely feedback during the process.",
-  },
-  {
-    question: "How do payments work?",
-    answer: "Projects are typically split into milestone payments.",
-  },
-];
-
 const FAQ = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const { data: faqs = [] } = useQuery({
+    queryKey: ["faqs"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("faqs")
+        .select("*")
+        .eq("is_enabled", true)
+        .order("display_order", { ascending: true });
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  if (faqs.length === 0) return null;
+
   return (
     <section id="faq" ref={ref} className="section-padding">
       <div className="container mx-auto px-6 lg:px-8">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -69,7 +46,6 @@ const FAQ = () => {
           </h2>
         </motion.div>
 
-        {/* Accordion */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -79,7 +55,7 @@ const FAQ = () => {
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem
-                key={index}
+                key={faq.id}
                 value={`item-${index}`}
                 className="glass-card border-glow rounded-xl px-6 border-none data-[state=open]:bg-card/80"
               >

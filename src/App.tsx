@@ -21,6 +21,7 @@ import SettingsManager from "./pages/admin/SettingsManager";
 import NotFound from "./pages/NotFound";
 import Marketplace from "./pages/Marketplace";
 import MarketplaceManager from "./pages/admin/MarketplaceManager";
+import FAQManager from "./pages/admin/FAQManager";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
               <Route path="leads" element={<LeadsManager />} />
               <Route path="settings" element={<SettingsManager />} />
               <Route path="marketplace" element={<MarketplaceManager />} />
+              <Route path="faq" element={<FAQManager />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

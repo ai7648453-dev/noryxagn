@@ -89,6 +89,36 @@ export type Database = {
         }
         Relationships: []
       }
+      faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          display_order: number | null
+          id: string
+          is_enabled: boolean
+          question: string
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          is_enabled?: boolean
+          question: string
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          is_enabled?: boolean
+          question?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       hero_settings: {
         Row: {
           cta_primary_link: string | null
