@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, FileText, Home, Briefcase, MessageSquare, Wrench,
-  Image, Search, Inbox, Settings, LogOut, ExternalLink, Store
+  Image, Search, Inbox, Settings, LogOut, ExternalLink, Store, HelpCircle
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/hooks/useAuth";
@@ -18,6 +18,7 @@ const contentItems = [
   { title: "Services", url: "/admin/services", icon: Wrench },
   { title: "Testimonials", url: "/admin/testimonials", icon: MessageSquare },
   { title: "Marketplace", url: "/admin/marketplace", icon: Store },
+  { title: "FAQ Manager", url: "/admin/faq", icon: HelpCircle },
 ];
 
 const toolItems = [
