@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        heading: ['Sora', 'sans-serif'],
+        heading: ['Space Grotesk', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -28,6 +28,12 @@ export default {
           light: "hsl(var(--gold-light))",
           dark: "hsl(var(--gold-dark))",
         },
+        neon: {
+          DEFAULT: "hsl(var(--neon))",
+          light: "hsl(var(--neon-light))",
+          dark: "hsl(var(--neon-dark))",
+        },
+        cyan: "hsl(var(--cyan))",
         cream: "hsl(var(--cream))",
         charcoal: {
           DEFAULT: "hsl(var(--charcoal))",
@@ -99,8 +105,8 @@ export default {
           to: { opacity: "1", transform: "scale(1)" },
         },
         "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--gold) / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(var(--gold) / 0.5)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--neon) / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(var(--neon) / 0.5)" },
         },
         "float": {
           "0%, 100%": { transform: "translateY(0)" },
