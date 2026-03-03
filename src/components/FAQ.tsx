@@ -115,12 +115,12 @@ const FAQ = () => {
                 <AccordionItem
                   key={faq.id}
                   value={`item-${index}`}
-                  className="glass-card border-glow rounded-xl px-6 border-none data-[state=open]:bg-card/80"
+                  className="rounded-xl px-6 border border-border/40 bg-card/40 backdrop-blur-sm data-[state=open]:bg-card/70 data-[state=open]:border-gold/30 transition-colors"
                 >
-                  <AccordionTrigger className="text-left font-heading font-medium text-foreground hover:text-gold transition-colors hover:no-underline py-5">
+                  <AccordionTrigger className="text-left font-heading font-semibold text-base md:text-lg text-foreground hover:text-gold transition-colors hover:no-underline py-5 cursor-pointer gap-4">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5">
+                  <AccordionContent className="text-sm md:text-base text-muted-foreground leading-relaxed pb-5">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
