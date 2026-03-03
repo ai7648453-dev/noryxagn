@@ -46,7 +46,7 @@ const Contact = () => {
   return (
     <section id="contact" ref={ref} className="section-padding bg-secondary/30 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-gold/5 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[150px] pointer-events-none" />
       
       <div className="container mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
@@ -56,13 +56,13 @@ const Contact = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block px-4 py-2 text-xs font-medium tracking-widest uppercase text-gold border border-gold/30 rounded-full bg-gold/5 mb-6">
+            <span className="inline-block px-4 py-2 text-xs font-medium tracking-widest uppercase text-primary border border-primary/30 rounded-full bg-primary/5 mb-6">
               Contact
             </span>
             
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mb-6 leading-tight">
               Let's Build Something{" "}
-              <span className="text-gradient-gold">That Works</span>
+              <span className="text-gradient-neon">That Works</span>
             </h2>
             
             <p className="text-lg text-muted-foreground mb-8">
@@ -72,7 +72,7 @@ const Contact = () => {
 
             <div className="space-y-4 text-muted-foreground">
               <p className="flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-gold" />
+                <span className="w-2 h-2 rounded-full bg-primary" />
                 Response within 24-48 hours
               </p>
               <p className="flex items-center gap-3">
@@ -100,7 +100,7 @@ const Contact = () => {
                     name="name"
                     required 
                     placeholder="Your name" 
-                    className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12"
+                    className="bg-secondary/50 border-border/50 focus:border-primary/50 h-12"
                   />
                 </div>
                 <div className="space-y-2">
@@ -110,7 +110,7 @@ const Contact = () => {
                     required 
                     type="email" 
                     placeholder="your@email.com" 
-                    className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12"
+                    className="bg-secondary/50 border-border/50 focus:border-primary/50 h-12"
                   />
                 </div>
               </div>
@@ -122,7 +122,7 @@ const Contact = () => {
                     name="phone"
                     type="tel"
                     placeholder="+1 (555) 000-0000" 
-                    className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12"
+                    className="bg-secondary/50 border-border/50 focus:border-primary/50 h-12"
                   />
                 </div>
                 <div className="space-y-2">
@@ -130,7 +130,7 @@ const Contact = () => {
                   <Input 
                     name="company"
                     placeholder="Your company" 
-                    className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12"
+                    className="bg-secondary/50 border-border/50 focus:border-primary/50 h-12"
                   />
                 </div>
               </div>
@@ -138,7 +138,7 @@ const Contact = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Budget Range *</label>
                 <Select value={budget} onValueChange={setBudget}>
-                  <SelectTrigger className="bg-secondary/50 border-border/50 focus:border-gold/50 h-12">
+                  <SelectTrigger className="bg-secondary/50 border-border/50 focus:border-primary/50 h-12">
                     <SelectValue placeholder="Select your budget" />
                   </SelectTrigger>
                   <SelectContent>
@@ -157,7 +157,7 @@ const Contact = () => {
                   required
                   placeholder="Tell us about your project, goals, and timeline..."
                   rows={5}
-                  className="bg-secondary/50 border-border/50 focus:border-gold/50 resize-none"
+                  className="bg-secondary/50 border-border/50 focus:border-primary/50 resize-none"
                 />
               </div>
 
