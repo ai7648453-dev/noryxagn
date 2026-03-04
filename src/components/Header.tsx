@@ -5,11 +5,12 @@ import { Button } from "@/components/ui/button";
 import noryxLogo from "@/assets/noryx-logo.png";
 
 const navItems = [
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/contact" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Marketplace", href: "/marketplace" },
+  { label: "Process", href: "/#process" },
+  { label: "Services", href: "/#services" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const Header = () => {
@@ -35,10 +36,12 @@ const Header = () => {
     >
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <a href="/" className="flex items-center">
+          {/* Logo */}
+          <a href="#" className="flex items-center">
             <img src={noryxLogo} alt="NORYX" className="h-14 w-auto" />
           </a>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <a
@@ -51,12 +54,14 @@ const Header = () => {
             ))}
           </nav>
 
+          {/* Desktop CTA */}
           <div className="hidden md:block">
             <Button variant="hero" size="lg" asChild>
-              <a href="/contact">Get Free Strategy Call</a>
+              <a href="#contact">Start Your Project</a>
             </Button>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-foreground"
@@ -67,6 +72,7 @@ const Header = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -91,8 +97,8 @@ const Header = () => {
                 </motion.a>
               ))}
               <Button variant="hero" size="lg" className="mt-4" asChild>
-                <a href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  Get Free Strategy Call
+                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  Start Your Project
                 </a>
               </Button>
             </nav>

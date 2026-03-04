@@ -86,11 +86,11 @@ const FAQ = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 text-xs font-medium tracking-widest uppercase text-primary border border-primary/30 rounded-full bg-primary/5 mb-6">
+          <span className="inline-block px-4 py-2 text-xs font-medium tracking-widest uppercase text-gold border border-gold/30 rounded-full bg-gold/5 mb-6">
             FAQ
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground">
-            Frequently Asked <span className="text-gradient-neon">Questions</span>
+            Frequently Asked <span className="text-gradient-gold">Questions</span>
           </h2>
         </motion.div>
 
@@ -115,9 +115,9 @@ const FAQ = () => {
                 <AccordionItem
                   key={faq.id}
                   value={`item-${index}`}
-                  className="rounded-xl px-6 border border-border/40 bg-card/40 backdrop-blur-sm data-[state=open]:bg-card/70 data-[state=open]:border-primary/30 transition-colors"
+                  className="rounded-xl px-6 border border-border/40 bg-card/40 backdrop-blur-sm data-[state=open]:bg-card/70 data-[state=open]:border-gold/30 transition-colors"
                 >
-                  <AccordionTrigger className="text-left font-heading font-semibold text-base md:text-lg text-foreground hover:text-primary transition-colors hover:no-underline py-5 cursor-pointer gap-4">
+                  <AccordionTrigger className="text-left font-heading font-semibold text-base md:text-lg text-foreground hover:text-gold transition-colors hover:no-underline py-5 cursor-pointer gap-4">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-sm md:text-base text-muted-foreground leading-relaxed pb-5">
